@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 1.0,),
+                SizedBox(height: 40.0,),
                 RaisedButton(
                   color:  Colors.yellow,
                   textColor: Colors.white,
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
               print("cliked");
             } ,
             child: Text(
-              "Don't have hav an account? Register here.",
+              "Don't have hav an account? Register here as a driver.",
             ),
          )
 
