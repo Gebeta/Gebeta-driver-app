@@ -1,3 +1,4 @@
+import 'package:app_drivers/AllScrees/mainscreen.dart';
 import 'package:app_drivers/AllScrees/signinscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,7 @@ class LoginScreen extends StatelessWidget
                   ),
                   SizedBox(height: 40.0,),
                   RaisedButton(
-                    color:  Colors.yellow,
+                    color:  Colors.deepOrange,
                     textColor: Colors.white,
                     child: Container(
                       height: 50.0,
@@ -79,7 +80,8 @@ class LoginScreen extends StatelessWidget
                       borderRadius: new BorderRadius.circular(24.0)
                     ),
                     onPressed: (){
-                      print("login button iss clicked");
+
+                      Navigator.pushNamedAndRemoveUntil(context, MainScreen.idScreen, (route) => false);
                     }
                     ,
                   )
