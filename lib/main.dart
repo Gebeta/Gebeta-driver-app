@@ -1,9 +1,11 @@
 import 'package:app_drivers/AllScrees/loginscreen.dart';
 import 'package:app_drivers/AllScrees/mainscreen.dart';
 import 'package:app_drivers/AllScrees/signinscreen.dart';
+import 'package:app_drivers/scoped-model/main_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 void main()  async
 {
@@ -16,25 +18,29 @@ void main()  async
 DatabaseReference usersRef =FirebaseDatabase.instance.reference().child("users");
 
 class MyApp extends StatelessWidget {
+    final MainModel _model = MainModel();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Gebeta Delivery',
-      theme: ThemeData(
-        fontFamily:  "Brand Bold" ,
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return ScopedModel<MainModel>(
+      model: _model,
+      child: MaterialApp(
+        title: 'Gebeta Delivery',
+        theme: ThemeData(
+          fontFamily:  "Brand Bold" ,
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        initialRoute:LoginScreen.idScreen,
+        routes:
+      {
+         SigninScreen.idScreen: (context) => SigninScreen(),
+         LoginScreen.idScreen: (context) => LoginScreen(),
+         MainScreen.idScreen: (context) => MainScreen(),
+      },
+    
+        debugShowCheckedModeBanner: false,
       ),
-      initialRoute:LoginScreen.idScreen,
-      routes:
-    {
-       SigninScreen.idScreen: (context) => SigninScreen(),
-       LoginScreen.idScreen: (context) => LoginScreen(),
-       MainScreen.idScreen: (context) => MainScreen(),
-    },
-
-      debugShowCheckedModeBanner: false,
     );
   }
 }
