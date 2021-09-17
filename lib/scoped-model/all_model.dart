@@ -5,7 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'package:http/http.dart' as http;
 
-String link = "http://192.168.1.9:3000";
+String link = "http://192.168.43.168:3000";
 
 mixin AllModels on Model {
   Driver _authenticatedUser = Driver(id: "", email: "", token: "");

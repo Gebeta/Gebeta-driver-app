@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context, SigninScreen.idScreen, (route) => false);
                 },
                 child: Text(
-                  "Don't have hav an account? Register here as a driver.",
+                  "Don't have an account? Register here as a driver.",
                 ),
               ),
             ],
