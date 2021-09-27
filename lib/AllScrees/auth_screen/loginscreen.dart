@@ -1,5 +1,7 @@
+import 'package:app_drivers/AllScrees/main_screen.dart';
 import 'package:app_drivers/AllScrees/mainscreen.dart';
-import 'package:app_drivers/AllScrees/signinscreen.dart';
+import 'package:app_drivers/AllScrees/auth_screen/signinscreen.dart';
+import 'package:app_drivers/constants.dart';
 import 'package:app_drivers/scoped-model/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -129,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ScopedModelDescendant<MainModel>(
                           builder: (context, Widget child, MainModel model) {
                         return RaisedButton(
-                          color: Colors.deepOrange,
+                          color: gPrimaryColor,
                           textColor: Colors.white,
                           child: Container(
                             height: 50.0,
@@ -175,8 +177,8 @@ class _LoginScreenState extends State<LoginScreen> {
       _formData['email'],
     );
     if (response['success']) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, MainScreen.idScreen, (route) => false);
+      Navigator.push(
+        context, MaterialPageRoute(builder: (context) => MainScreenT()));
       displayToastMessage(response['message'], context);
     } else {
       showDialog(

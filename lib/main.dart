@@ -1,11 +1,16 @@
-import 'package:app_drivers/AllScrees/loginscreen.dart';
+import 'package:app_drivers/AllScrees/auth_screen/cart_info_screen.dart';
+import 'package:app_drivers/AllScrees/auth_screen/loginscreen.dart';
+import 'package:app_drivers/AllScrees/main_screen.dart';
 import 'package:app_drivers/AllScrees/mainscreen.dart';
-import 'package:app_drivers/AllScrees/signinscreen.dart';
+import 'package:app_drivers/AllScrees/auth_screen/signinscreen.dart';
+import 'package:app_drivers/constants.dart';
 import 'package:app_drivers/scoped-model/main_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main()  async
 {
@@ -13,9 +18,15 @@ void main()  async
   await Firebase.initializeApp();
 
   runApp(MyApp());
+  
 }
 
+final FirebaseAuth auth = FirebaseAuth.instance;
+// final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
 DatabaseReference usersRef =FirebaseDatabase.instance.reference().child("users");
+DatabaseReference driversRef =FirebaseDatabase.instance.reference().child("drivers");
+// DatabaseReference rideRef =FirebaseDatabase.instance.reference().child("drivers").child(currentfirebaseUser.uid).child("newRide");
 
 class MyApp extends StatelessWidget {
     final MainModel _model = MainModel();
@@ -28,16 +39,18 @@ class MyApp extends StatelessWidget {
         title: 'Gebeta Delivery',
         theme: ThemeData(
           fontFamily:  "Brand Bold" ,
-          primarySwatch: Colors.blue,
+          primaryColor: gsecondaryColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         // initialRoute:MainScreen.idScreen,
-        initialRoute:  LoginScreen.idScreen,
+        initialRoute:  MainScreenT.idScreen,
         routes:
       {
          SigninScreen.idScreen: (context) => SigninScreen(),
          LoginScreen.idScreen: (context) => LoginScreen(),
          MainScreen.idScreen: (context) => MainScreen(),
+         MainScreenT.idScreen: (context) => MainScreenT(),
+         CarInfoScreen.idScreen: (context) => CarInfoScreen(""),
       },
     
         debugShowCheckedModeBanner: false,

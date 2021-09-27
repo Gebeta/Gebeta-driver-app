@@ -1,5 +1,9 @@
-import 'package:app_drivers/AllScrees/loginscreen.dart';
+import 'package:app_drivers/AllScrees/auth_screen/cart_info_screen.dart';
+import 'package:app_drivers/AllScrees/auth_screen/loginscreen.dart';
+import 'package:app_drivers/AllScrees/auth_screen/upload_license.dart';
 import 'package:app_drivers/AllScrees/mainscreen.dart';
+import 'package:app_drivers/AllScrees/waitingscreen.dart';
+import 'package:app_drivers/constants.dart';
 import 'package:app_drivers/main.dart';
 import 'package:app_drivers/scoped-model/main_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -172,28 +176,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         },
                         style: TextStyle(fontSize: 16.0),
                       ),
-                      TextFormField(
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: "CAR PLATE NUMBER AA12345",
-                          labelStyle: TextStyle(
-                            fontSize: 14.0,
-                          ),
-                          hintStyle: TextStyle(
-                            color: Colors.deepOrange,
-                            fontSize: 10.0,
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.toString().isEmpty || value.toString().length < 7) {
-                            return 'car palte can\'t be Empty';
-                          }
-                        },
-                        onChanged: (String value) {
-                          _formData['carplate'] = value;
-                        },
-                        style: TextStyle(fontSize: 16.0),
-                      ),
+                      
                       SizedBox(
                         height: 1.0,
                       ),
@@ -202,7 +185,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         obscureText: hidePwd,
                         validator: (value) {
                           if (value.toString().isEmpty ||
-                              value.toString().length < 6) {
+                              value.toString().length < 8) {
                             return 'Invalid Password';
                           }
                         },
@@ -246,7 +229,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       ScopedModelDescendant<MainModel>(
                           builder: (context, Widget child, MainModel model) {
                         return RaisedButton(
-                          color: Colors.yellow,
+                          color: gPrimaryColor,
                           textColor: Colors.white,
                           child: Container(
                             height: 50.0,
@@ -326,15 +309,14 @@ class _SigninScreenState extends State<SigninScreen> {
         _formData['last_name'],
         _formData['password'],
         _formData['email'],
-        _formData['carplate'],
-        "+251925272985",
-        "Summit");
+        _formData['phone_no'],);
     print("response data " + response['success'].toString());
 
     if (response['success']) {
       displayToastMessage(response['message'], context);
-      Navigator.pushNamedAndRemoveUntil(
-          context, MainScreen.idScreen, (route) => false);
+
+          Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UploadLicense(response['id'])));
     } else {
       showDialog(
           context: context,
